@@ -17,7 +17,7 @@ import * as WebSocket from "ws";
 
 // Instancia del servidor
 const wsServer = new WebSocket.Server({
-  port: 3000,
+  port: process.env.PORT,
 });
 
 // A continuación vamos a definir algunas funciones para manejar los eventos
@@ -51,3 +51,6 @@ const messageReceived = (data) => {
 
 // Configuración de las funciones de eventos.
 wsServer.addListener("connection", clientReceived);
+
+// Información
+console.log(`Puerto: ${process.env.PORT}`);
