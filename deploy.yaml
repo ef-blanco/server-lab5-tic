@@ -1,0 +1,37 @@
+# En caso de dudas o si desea profundizar consulte en:
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md
+# https://docs.docker.com/compose/
+
+# En primer lugar definimos cada uno de los servicios
+# que corresponden a un contenedor para desplegar nuestra
+# imagen
+services:    
+  # Servidor de la aplicacion  
+  ws-server:    
+    # Imagen a desplegar. En caso de que no 
+    # se encuentre en el sistema Host, lo intentará buscar en Dockerhub
+    image: ggonzr/ws-server:1.1
+    
+    # Nombre del contenedor
+    container_name: servidor
+
+    # A continuacion declaramos los puertos de nuestra aplicacion.
+    # Esto permite asociar un puerto del Host con el puerto del contenedor
+    # Formato <HOST>:<CONTENEDOR>
+    ports: 
+      - "3000:3000"
+    
+    # Seguidamente definimos las variables del entorno. En nuestro caso
+    # definimos el puerto. Estas variables tambien se pueden cargar de un
+    # .env ya existente
+    environment:
+      - PORT=3000
+
+    # Red
+    networks:
+      - red_interna
+
+# Redes
+networks:
+  red_interna: {}
+

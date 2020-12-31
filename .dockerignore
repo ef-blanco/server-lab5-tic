@@ -1,0 +1,4 @@
+# Archivos a ignorar en la generacion de la imagen
+node_modules/
+.env
+ws-server.yaml
