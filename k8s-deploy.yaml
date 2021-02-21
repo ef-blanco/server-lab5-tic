@@ -48,7 +48,9 @@ spec:
               memory: "256Mi"
               cpu: "500m"
           ports:
-            - containerPort: 3000      
+            - containerPort: 3000
+          # Siempre realiza el pull de la imagen con el fin de traer la version mas actualizada
+          imagePullPolicy: Always  
 
 # Vamos a especificar el balanceador de carga en este mismo archivo
 # para ello vamos a crear otro documento separado, esto se hace con el operador "---"
