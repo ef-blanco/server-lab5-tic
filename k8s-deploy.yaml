@@ -10,8 +10,12 @@ kind: Deployment
 metadata:
   # Nombre
   name: ws-server-deployment
+  # Etiqueta del Deployment
+  labels:
+    app: ws-server-deployment  
 # Especificaciones del elemento
 spec:
+  replicas: 1
   # K8s agrupa los elementos del Deployment y los interconecta entre si utilizando etiquetas
   # Aqui definimos como seleccionar los elementos juntos
   selector:
@@ -49,6 +53,10 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 3000
+          # Variables de entorno
+          env:
+            - name: "PORT"
+              value: "3000"
           # Siempre realiza el pull de la imagen con el fin de traer la version mas actualizada
           imagePullPolicy: Always  
 
@@ -66,7 +74,8 @@ spec:
   # En este caso, estamos ocupando el puerto 3000 de la maquina host
   # y lo estamos redirigiendo al 3000 de la red virtual del contenedor
   ports:
-    - port: 3000
+    - protocol: TCP
+      port: 3000
       targetPort: 3000
   type: LoadBalancer
     
