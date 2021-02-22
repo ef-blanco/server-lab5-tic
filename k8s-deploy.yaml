@@ -43,7 +43,7 @@ spec:
       #        configurado en K8s
       containers:
         - name: ws-server-deployment
-          image: ggonzr/ws-client
+          image: ggonzr/ws-client:1.1
           # Limites de recursos del contenedor
           # Memoria: 256 MiB
           # CPU: 500/1000 donde 1000 representa utilizar un core completo
