@@ -34,7 +34,7 @@ const clientReceived = (client, request) => {
 
   // Respuesta al evento de un nuevo mensaje
   client.on("message", (messageData) => {
-    console.log(`Mensaje recibido por parte del cliente: ${messageData}`);
+    console.log(`Mensaje recibido por parte del cliente v2: ${messageData}`);
     const messageToSend = messageReceived(messageData);
     client.send(messageToSend);
   });
