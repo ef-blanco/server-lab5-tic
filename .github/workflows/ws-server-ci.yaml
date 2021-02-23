@@ -1,0 +1,36 @@
+# En este archivo declaramos el proceso de integración continua para construir y publica
+# la imagen en Docker Hub. Primero declare las credenciales y secretos en su repositorio.
+# Tenga en cuenta que el repositorio que declaramos ya debe existir en Docker Hub.
+# Para mas detalles consulte: https://docs.github.com/en/actions/guides/publishing-docker-images
+
+# Nombre del Workflow
+name: Publish Docker image
+# Evento Trigger
+on:
+  # En nuestro caso vamos a trabajar con el evento release
+  release:
+    types: [published]
+# Trabajos a ejecutar
+jobs:
+  # Construir y subir la imagen a Docker Hub
+  push_to_registry:
+    # Nombre del Job
+    name: Push Docker image to Docker Hub
+    # Entorno de ejecución, en este caso la ultima versión de Ubuntu
+    runs-on: ubuntu-latest
+    # Pasos a ejecutar
+    steps:
+      # Clonar el repositorio, observe que aqui estamos incluyendo paquetes existentes (Actions)
+      # en el marketplace de Github Actions
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      # Construir la imagen y hacer push
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        # Credenciales y URL del repositorio
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ggonzr/ws-client
+          tag_with_ref: true
+
