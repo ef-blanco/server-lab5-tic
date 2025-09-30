@@ -10,7 +10,7 @@ services:
   ws-server:    
     # Imagen a desplegar. En caso de que no 
     # se encuentre en el sistema Host, lo intentará buscar en Dockerhub
-    image: ggonzr/ws-server:1.1
+    image: server-lab5-tic:1.2
     
     # Nombre del contenedor
     container_name: servidor
